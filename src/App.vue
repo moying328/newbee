@@ -1,25 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <transition :name="transitionName">
-      <router-view class="router-view"/>  
+    <transition :name="transitionName" mode="out-in">
+      <!-- 路由匹配到的组件将渲染在这里 -->
+      <router-view class="router-view"/>
     </transition>
-    
+    <nav-bar v-if="isShowNav"></nav-bar>
   </div>
 </template>
 
 <script>
+import navBar from '@/components/NavBar'
 export default {
   data(){
     return{
-      transitionName:'slide-left'
+      transitionName:'slide-left',
+      isShowNav:true,
+      showMenuList:['/','/home','/category','/cart','/user']
     }
+  },
+  components:{
+    navBar
   },
   watch: {
       $route(to, from) {
+        // 通过 ES6 提供的 includes 属性判断 to.path 是否包含在数组内
+        if(this.showMenuList.includes(to.path)){
+          this.isShowNav=true
+        }else{
+          this.isShowNav=false
+        }
         // 由主级到次级
         // to.meta 能取到 route 路由参数中的 meta 属性
         if (to.meta.index > from.meta.index) {
@@ -44,13 +53,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
+  //不让页面切换时的平移来把整个页面蹭大
   position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 1000;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .router-view{
