@@ -50,6 +50,14 @@ const routes = [
     meta:{
       index:2// 添加 meta 属性，约定 1 为第一级
     }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: ()=>import('../views/Login.vue'),
+    meta:{
+      index:2// 添加 meta 属性，约定 1 为第一级
+    }
   }
 ]
 
