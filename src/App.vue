@@ -52,12 +52,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  //不让页面切换时的平移来把整个页面蹭大
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  width: 100%;
-  overflow: hidden;
 }
 
 .router-view{
