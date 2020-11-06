@@ -25,7 +25,7 @@
       <header class="good-header">新品上线</header>
       <div class="good-box">
           <div class="good-item" v-for="item in newGoodses" :key="item.goodsId" @click="goToDetail(item)">
-            <img :src="`${item.goodsCoverImg}`" alt="">
+            <img :src="item.goodsCoverImg" alt="">
             <div class="good-desc">
               <div class="title">{{ item.goodsName }}</div>
               <div class="price">¥ {{ item.sellingPrice }}</div>
@@ -134,6 +134,7 @@ export default {
       forbidClick: true
     });
     const { data } = await getHome()
+    console.log(data)
     this.swiperList = data.carousels
     this.newGoodses = data.newGoodses
     this.hots = data.hotGoodses
