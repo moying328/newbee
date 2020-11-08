@@ -1,4 +1,5 @@
-import axios from '../utils/axios'// 二次封装的 axios 
+// user.js
+import axios from '../utils/axios' // 二次封装的 axios 
 
 // 获取用户信息
 export function getUserInfo() {
@@ -19,3 +20,4 @@ export function logout() {
 export function register(params) {
   return axios.post('/user/register', params);
 }
+

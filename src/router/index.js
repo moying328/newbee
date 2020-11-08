@@ -58,7 +58,15 @@ const routes = [
     meta:{
       index:2// 添加 meta 属性，约定 1 为第一级
     }
-  }
+  },
+  {
+    path: '/product-list',
+    name: 'product-list',
+    component: () => import(/* webpackChunkName: "product-list" */ '../views/ProductList.vue'),
+    meta: {
+      index: 2
+    }
+  },
 ]
 
 const router = new VueRouter({

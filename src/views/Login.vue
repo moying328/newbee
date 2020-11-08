@@ -1,14 +1,15 @@
+// Login.vue
 <template>
   <div class="login">
-    <img class="logo" src="//s.weituibao.com/1582958061265/mlogo.png" alt="">
-    <div v-if="type=='login'" class="login-body login">
+  	<img class="logo" src="//s.weituibao.com/1582958061265/mlogo.png" alt="">
+    <div v-if="type == 'login'" class="login-body login">
       <van-form @submit="onSubmit">
         <van-field
           v-model="username"
           name="username"
           label="用户名"
           placeholder="用户名"
-          :rules="[{required:true,message:'请填写用户名'}]"
+          :rules="[{ required: true, message: '请填写用户名' }]"
         />
         <van-field
           v-model="password"
@@ -45,7 +46,7 @@
           :rules="[{ required: true, message: '请填写密码' }]"
         />
         <div class="verify">
-          <Verify ref="registerVerifyRef" @error="error" :showButton="false" @success="success" :width="'100%'" :height="'40px'" :fontSize="'16px'" :type="2"></Verify>
+          <Verify ref="loginVerifyRef" @error="error" :showButton="false" @success="success" :width="'100%'" :height="'40px'" :fontSize="'16px'" :type="2"></Verify>
         </div>
         <div style="margin: 16px;">
           <div class="link-login" @click="toggle('login')">已有登录账号</div>
@@ -57,15 +58,15 @@
 </template>
 
 <script>
-// 添加登录和注册接口
-import {login,register} from '../service/user'
+// 添加登录接口
+import { login, register } from '../service/user'
 // 本地存储函数
 import { setLocal, getLocal } from '@/common/js/utils'
 import { Toast } from 'vant'
 import Verify from 'vue2-verify'
 export default {
-  data(){
-    return{
+	data() {
+    return {
       username: '',
       password: '',
       username1: '',
@@ -74,44 +75,44 @@ export default {
       verify: false, // 此变量判断验证码输入是否正确
     }
   },
-  components:{
-    Verify, // 记得验证码组件是需要注册的，否则直接使用会报错
+  components: {
+    Verify
   },
-  methods:{
-    //执行验证码
-    dealTriVer(){
+  methods: {
+    // 执行验证码
+    dealTriVer() {
       this.$refs.loginVerifyRef.$refs.instance.checkCode()
     },
-    toggle(v){
-      this.verify=false
-      this.type=v
+    toggle(v) {
+      this.verify = false
+      this.type = v
     },
-    async onSubmit(values){
+    async onSubmit(values) {
       // 每次提交之前都要执行一次验证码，获取 verify 的最新值
-      this.dealTriVer
-      if(!this.verify){
+      this.dealTriVer()
+      if (!this.verify) {
         Toast.fail('验证码未填或填写错误!')
         return
       }
-      if(this.type=='login'){
-        const {data,resultCode}=await login({
-          "loginName":values.username,
-          "passwordMd5":this.$md5(values.password)
+      if (this.type == 'login') {
+        const { data, resultCode } = await login({
+          "loginName": values.username,
+          "passwordMd5": this.$md5(values.password)
         })
-        setLocal("token,data")
-        window.location.href='/'
-      }else{
-        const{data}=await register({
-          "loginName":values.username1,
-          "passwod":values.password1
+        setLocal('token', data)
+        window.location.href = '/'
+      } else {
+        const { data } = await register({
+          "loginName": values.username1,
+          "password": values.password1
         })
-        Toast.success("注册成功")
-        this.type="login"
+        Toast.success('注册成功')
+        this.type = 'login'
       }
     },
     // Verify 组件验证成功的回调
-    success(obj){
-      this.verify=true
+    success(obj) {
+      this.verify = true
     },
     // Verify 组件验证失败的回调
     error(obj) {
@@ -122,7 +123,7 @@ export default {
 </script>
 
 <style lang="less">
-.login {
+  .login {
     .logo {
       width: 120px;
       height: 120px;
