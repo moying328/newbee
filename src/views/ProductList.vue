@@ -14,8 +14,8 @@
       </header>
       <van-tabs type="card" color="#1baeae" @click="changeTab">
         <van-tab title="推荐" name=""></van-tab>
-        <van-tab title="新品" name=""></van-tab>
-        <van-tab title="价格" name=""></van-tab>
+        <van-tab title="新品" name="new"></van-tab>
+        <van-tab title="价格" name="price"></van-tab>
       </van-tabs>
     </div>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="product-list-refresh">
@@ -27,12 +27,12 @@
         @offset="300"
       >
         <div class="product-item" v-for="(item,index) in productList" :key="index" @click="productDetail(item)">
-          <img :src="`//api.newbee.ltd${item.goodsCoverImg}`" />
-          <!-- <div class="product-info">
-            <p class="name">{{{{item.goodsName}}}}</p>
+          <img :src="`http://47.99.134.126:28019${item.goodsCoverImg}`" />
+          <div class="product-info">
+            <p class="name">{{item.goodsName}}</p>
             <p class="subtitle">{{item.goodsIntro}}</p>
             <span class="price">￥ {{item.sellingPrice}}</span>
-          </div> -->
+          </div>
         </div>
       </van-list>
     </van-pull-refresh>
@@ -55,6 +55,53 @@ export default {
       orderBy: ''
     }
   },
+  methods:{
+    async init(){
+      const { categoryId,from }=this.$route.query
+      if(!categoryId && !this.keyword){
+        this.finished=true
+        this.loading=false
+        return
+      }
+      const {data,data:{list}}=await search({ pageNumber: this.page, goodsCategoryId: categoryId, keyword: this.keyword, orderBy: this.orderBy })
+      this.productList=this.productList.concat(list)
+      this.totalPage=data.totalPage
+      this.loading=false
+      if(this.page>=data.totalPage) this.finished=true
+    },
+    goBack(){
+      this.$router.go(-1)
+    },
+    productDetail(item){
+      this.$router.push({path:`product/${item.goodsId}`})
+    },
+    getSearch(){
+      this.onRefresh()
+    },
+    onLoad(){
+      if(!this.refreshing && this.page<this.totalPage){
+        this.page=this.page+1
+      }
+      if(this.refreshing){
+        this.productList=[]
+        this.refreshing=false
+      }
+      this.init()
+    },
+    onRefresh() {
+      this.refreshing = true
+      this.finished = false
+      this.loading = true
+      this.page = 1
+      this.onLoad()
+    },
+    changeTab(name, title) {
+      console.log(title)
+      this.orderBy = name
+      this.onRefresh()
+    }
+    
+  }
 }
 </script>
 
