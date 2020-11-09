@@ -76,9 +76,9 @@ const routes = [
     }
   },
   {
-    path: '/list',
-    name: 'list',
-    component: () => import(/* webpackChunkName: "list" */ '../views/study/List.vue'),
+    path: '/product/:id',
+    name: 'product',
+    component: () => import(/* webpackChunkName: "ProductDetail" */ '../views/ProductDetail.vue'),
     meta: {
       index: 2
     }
