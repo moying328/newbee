@@ -67,6 +67,22 @@ const routes = [
       index: 2
     }
   },
+  {
+    path: '/freshen',
+    name: 'freshen',
+    component: () => import(/* webpackChunkName: "freshen" */ '../views/study/Freshen.vue'),
+    meta: {
+      index: 2
+    }
+  },
+  {
+    path: '/list',
+    name: 'list',
+    component: () => import(/* webpackChunkName: "list" */ '../views/study/List.vue'),
+    meta: {
+      index: 2
+    }
+  },
 ]
 
 const router = new VueRouter({
