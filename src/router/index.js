@@ -68,14 +68,6 @@ const routes = [
     }
   },
   {
-    path: '/freshen',
-    name: 'freshen',
-    component: () => import(/* webpackChunkName: "freshen" */ '../views/study/Freshen.vue'),
-    meta: {
-      index: 2
-    }
-  },
-  {
     path: '/product/:id',
     name: 'product',
     component: () => import(/* webpackChunkName: "ProductDetail" */ '../views/ProductDetail.vue'),
