@@ -1,24 +1,31 @@
 <template>
   <header class="simple-header">
     <i class="nbicon nbfanhui" @click="goBack"></i>
-    <div class="simple-header-title">{{ title }}</div>
+    <div class="simple-header-name">{{ name }}</div>
     <i class="nbicon nbmore"></i>
   </header>
 </template>
 
 <script>
 export default {
-  // 外部传入的 title 属性，可以定义类型和默认值
-  props:{
-    title:{
-      type:String,
-      default:''
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    back: {
+      type: String,
+      default: ''
     }
   },
-  methods:{
-    // 点击头部组件右侧返回按钮，让路由往回切一页
-    goBack(){
-      this.$router.go(-1)
+  methods: {
+    goBack() {
+      if (!this.back) {
+        this.$router.go(-1)
+      } else {
+        this.$router.push({ path: this.back })
+      }
+      this.$emit('callback')
     }
   }
 }
@@ -39,7 +46,7 @@ export default {
     color: #252525;
     background: #fff;
     border-bottom: 1px solid #dcdcdc;
-    .simple-header-title {
+    .simple-header-name {
       font-size: 14px;
     }
   }

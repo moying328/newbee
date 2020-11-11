@@ -1,6 +1,6 @@
 <template>
   <div class="cart-box">
-    <s-header :title="'购物车'"></s-header>
+    <s-header :name="'购物车'"></s-header>
     <div class="cart-body">
       <van-checkbox-group @change="groupChange" v-model="result" ref="checkboxGroup">
         <van-swipe-cell :right-width="50" v-for="(item, index) in list" :key="index">
@@ -124,9 +124,8 @@ export default {
         return
       }
       const params = JSON.stringify(this.result)
-      // for(let i = 0; i < this.result.length; i++) {
-      //   await deleteCartItem(this.result[i])
-      // }
+      // console.log(typeof(this.result))
+      // console.log(typeof params)
       this.$router.push({ path: `create-order?cartItemIds=${params}` })
     },
     async deleteGood(id) {
@@ -135,6 +134,7 @@ export default {
       this.init()
     },
     groupChange(result) {
+      console.log(result)
       if (result.length == this.list.length) {
         this.checkAll = true
       } else {

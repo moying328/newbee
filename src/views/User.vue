@@ -1,6 +1,6 @@
 <template>
   <div class="user-box">
-    <s-header :title="'我的'"></s-header>
+    <s-header :name="'我的'"></s-header>
     <div class="user-info">
       <div class="info">
         <img src="//s.weituibao.com/1583583975067/user-graduate%20(1).png"/>

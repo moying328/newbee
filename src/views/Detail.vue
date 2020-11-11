@@ -1,5 +1,5 @@
 <template>
-  <div><s-header :title="'详情'"></s-header></div>
+  <div><s-header :name="'详情'"></s-header></div>
 </template>
 
 <script>
