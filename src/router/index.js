@@ -75,6 +75,22 @@ const routes = [
       index: 2
     }
   },
+  {
+    path: '/create-order',
+    name:'create-order',
+    component:()=>import('../views/CreateOrder.vue'),
+    meta:{
+      index:2
+    }
+  },
+  {
+    path: '/address',
+    name: 'address',
+    meta: {
+      index: 2
+    },
+    component: () => import(/* webpackChunkName: "address" */ '../views/Address.vue'),
+  }
 ]
 
 const router = new VueRouter({
