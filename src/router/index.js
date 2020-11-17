@@ -90,6 +90,14 @@ const routes = [
       index: 2
     },
     component: () => import(/* webpackChunkName: "address" */ '../views/Address.vue'),
+  },
+  {
+    path: '/address-edit',
+    name: 'address-edit',
+    meta: {
+      index: 2
+    },
+    component: () => import(/* webpackChunkName: "address-edit" */ '../views/AddressEdit.vue'),
   }
 ]
 
