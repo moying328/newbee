@@ -21,3 +21,8 @@ export function register(params) {
   return axios.post('/user/register', params);
 }
 
+// 编辑
+export function EditUserInfo(params) {
+  return axios.put('/user/info', params);
+}
+

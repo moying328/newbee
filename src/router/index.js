@@ -98,6 +98,30 @@ const routes = [
       index: 2
     },
     component: () => import(/* webpackChunkName: "address-edit" */ '../views/AddressEdit.vue'),
+  },
+  {
+    path: '/order',
+    name: 'order',
+    meta: {
+      index: 2
+    },
+    component: () => import(/* webpackChunkName: "order" */ '../views/Order.vue'),
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    meta: {
+      index: 2
+    },
+    component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
+  },
+  {
+    path: '/about',
+    name: 'about',
+    meta: {
+      index: 2
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   }
 ]
 
